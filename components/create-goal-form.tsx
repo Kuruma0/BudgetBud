@@ -84,7 +84,7 @@ export function CreateGoalForm({ onSuccess }: CreateGoalFormProps) {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="targetAmount">Target Amount ($)</Label>
+        <Label htmlFor="targetAmount">Target Amount (ZAR)</Label>
         <Input
           id="targetAmount"
           type="number"

@@ -89,7 +89,7 @@ function generateSpendingAdvice(transaction: any, recentTransactions: any[], goa
   if (category === "Coffee" && amount > 5) {
     return {
       type: "bad_habit",
-      text: `That's a pricey coffee! Consider brewing at home to save $${(amount - 3).toFixed(2)} per cup. You could save over $${((amount - 3) * 20).toFixed(0)} monthly.`,
+      text: `That's a pricey coffee! Consider brewing at home to save R${(amount - 3).toFixed(2)} per cup. You could save over R${((amount - 3) * 20).toFixed(0)} monthly.`,
     }
   }
 
@@ -147,7 +147,7 @@ function generateSpendingAdvice(transaction: any, recentTransactions: any[], goa
   if (monthlySpending > 1000) {
     return {
       type: "bad_habit",
-      text: `Your monthly spending is quite high at $${monthlySpending.toFixed(0)}. Review your largest expense categories for potential savings.`,
+      text: `Your monthly spending is quite high at R${monthlySpending.toFixed(0)}. Review your largest expense categories for potential savings.`,
     }
   }
 

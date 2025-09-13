@@ -48,8 +48,8 @@ export async function checkAndAwardAchievements(userId: string) {
       newAchievements.push({
         user_id: userId,
         achievement_type: "savings_milestone",
-        achievement_name: `$${milestone.toLocaleString()} Saved`,
-        description: `Reached $${milestone.toLocaleString()} in total savings`,
+        achievement_name: `R${milestone.toLocaleString("en-ZA")} Saved`,
+        description: `Reached R${milestone.toLocaleString("en-ZA")} in total savings`,
         amount: milestone,
       })
     }

@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { BuckRewardNotification } from "@/components/buck-reward-notification"
 
 interface TransactionsListProps {
   userId: string
@@ -84,8 +85,8 @@ export async function TransactionsList({ userId }: TransactionsListProps) {
                 </div>
                 <div className="text-right">
                   <p className={`font-bold ${transaction.type === "income" ? "text-green-600" : "text-red-600"}`}>
-                    {transaction.type === "income" ? "+" : "-"}$
-                    {Number(transaction.amount).toLocaleString("en-US", {
+                    {transaction.type === "income" ? "+" : "-"}R
+                    {Number(transaction.amount).toLocaleString("en-ZA", {
                       minimumFractionDigits: 2,
                       maximumFractionDigits: 2,
                     })}
@@ -98,15 +99,24 @@ export async function TransactionsList({ userId }: TransactionsListProps) {
 
               {/* Display spending advice if available */}
               {transaction.spending_advice && transaction.spending_advice.length > 0 && (
-                <div className="mt-3 ml-13">
+                <div className="mt-3 ml-13 space-y-2">
                   {transaction.spending_advice.map((advice: any, index: number) => (
-                    <div key={index} className={`text-xs p-2 rounded-lg border ${getAdviceColor(advice.advice_type)}`}>
-                      <strong>
-                        {advice.advice_type === "good_habit" && "✅ Good habit: "}
-                        {advice.advice_type === "bad_habit" && "⚠️ Watch out: "}
-                        {advice.advice_type === "suggestion" && "💡 Tip: "}
-                      </strong>
-                      {advice.advice_text}
+                    <div key={index}>
+                      <div className={`text-xs p-2 rounded-lg border ${getAdviceColor(advice.advice_type)}`}>
+                        <strong>
+                          {advice.advice_type === "good_habit" && "✅ Good habit: "}
+                          {advice.advice_type === "bad_habit" && "⚠️ Watch out: "}
+                          {advice.advice_type === "suggestion" && "💡 Tip: "}
+                        </strong>
+                        {advice.advice_text}
+                      </div>
+                      {advice.advice_type === "good_habit" && (
+                        <BuckRewardNotification
+                          userId={userId}
+                          transactionId={transaction.id}
+                          adviceText={advice.advice_text}
+                        />
+                      )}
                     </div>
                   ))}
                 </div>

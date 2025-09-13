@@ -92,8 +92,8 @@ export async function SpendingInsights({ userId }: SpendingInsightsProps) {
           <div className="space-y-4">
             <div className="text-center">
               <p className="text-3xl font-bold text-gray-900">
-                $
-                {totalMonthlySpending.toLocaleString("en-US", {
+                R
+                {totalMonthlySpending.toLocaleString("en-ZA", {
                   minimumFractionDigits: 2,
                   maximumFractionDigits: 2,
                 })}
@@ -111,8 +111,8 @@ export async function SpendingInsights({ userId }: SpendingInsightsProps) {
                       <span className="text-sm text-gray-700">{category}</span>
                       <div className="flex items-center space-x-2">
                         <span className="text-sm font-medium">
-                          $
-                          {amount.toLocaleString("en-US", {
+                          R
+                          {amount.toLocaleString("en-ZA", {
                             minimumFractionDigits: 2,
                             maximumFractionDigits: 2,
                           })}
@@ -151,8 +151,8 @@ export async function SpendingInsights({ userId }: SpendingInsightsProps) {
                           {advice.transactions?.merchant || advice.transactions?.category}
                         </p>
                         <span className="text-sm text-gray-500">
-                          $
-                          {Number(advice.transactions?.amount).toLocaleString("en-US", {
+                          R
+                          {Number(advice.transactions?.amount).toLocaleString("en-ZA", {
                             minimumFractionDigits: 2,
                             maximumFractionDigits: 2,
                           })}

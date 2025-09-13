@@ -96,7 +96,7 @@ export async function GoalsOverview({ userId }: GoalsOverviewProps) {
               </div>
               <div>
                 <p className="text-2xl font-bold text-gray-900">
-                  ${goals?.reduce((sum, goal) => sum + Number(goal.current_amount), 0).toLocaleString() || "0"}
+                  R{goals?.reduce((sum, goal) => sum + Number(goal.current_amount), 0).toLocaleString("en-ZA") || "0"}
                 </p>
                 <p className="text-gray-600 text-sm">Total Saved</p>
               </div>
@@ -112,7 +112,7 @@ export async function GoalsOverview({ userId }: GoalsOverviewProps) {
               </div>
               <div>
                 <p className="text-2xl font-bold text-gray-900">
-                  ${goals?.reduce((sum, goal) => sum + Number(goal.target_amount), 0).toLocaleString() || "0"}
+                  R{goals?.reduce((sum, goal) => sum + Number(goal.target_amount), 0).toLocaleString("en-ZA") || "0"}
                 </p>
                 <p className="text-gray-600 text-sm">Total Target</p>
               </div>
@@ -158,15 +158,15 @@ export async function GoalsOverview({ userId }: GoalsOverviewProps) {
                 <div className="flex justify-between items-center">
                   <div>
                     <p className="text-lg font-bold text-gray-900">
-                      $
-                      {Number(goal.current_amount).toLocaleString("en-US", {
+                      R
+                      {Number(goal.current_amount).toLocaleString("en-ZA", {
                         minimumFractionDigits: 2,
                         maximumFractionDigits: 2,
                       })}
                     </p>
                     <p className="text-sm text-gray-600">
-                      of $
-                      {Number(goal.target_amount).toLocaleString("en-US", {
+                      of R
+                      {Number(goal.target_amount).toLocaleString("en-ZA", {
                         minimumFractionDigits: 2,
                         maximumFractionDigits: 2,
                       })}
@@ -185,8 +185,8 @@ export async function GoalsOverview({ userId }: GoalsOverviewProps) {
 
                 <div className="pt-2 border-t border-gray-100">
                   <p className="text-xs text-gray-500">
-                    $
-                    {(Number(goal.target_amount) - Number(goal.current_amount)).toLocaleString("en-US", {
+                    R
+                    {(Number(goal.target_amount) - Number(goal.current_amount)).toLocaleString("en-ZA", {
                       minimumFractionDigits: 2,
                       maximumFractionDigits: 2,
                     })}{" "}

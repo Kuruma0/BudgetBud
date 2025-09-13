@@ -119,7 +119,7 @@ export function AddTransactionModal({ open, onOpenChange }: AddTransactionModalP
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="amount">Amount ($)</Label>
+              <Label htmlFor="amount">Amount (ZAR)</Label>
               <Input
                 id="amount"
                 type="number"
@@ -166,7 +166,7 @@ export function AddTransactionModal({ open, onOpenChange }: AddTransactionModalP
             <Label htmlFor="merchant">Merchant/Source</Label>
             <Input
               id="merchant"
-              placeholder="e.g., Starbucks, Employer"
+              placeholder="e.g., Pick n Pay, Employer"
               value={merchant}
               onChange={(e) => setMerchant(e.target.value)}
             />

@@ -42,8 +42,8 @@ export async function AchievementsOverview({ userId }: AchievementsOverviewProps
     const achievementsToInsert = newSavingsAchievements.map((amount) => ({
       user_id: userId,
       achievement_type: "savings_milestone",
-      achievement_name: `$${amount.toLocaleString()} Saved`,
-      description: `Reached $${amount.toLocaleString()} in total savings`,
+      achievement_name: `R${amount.toLocaleString("en-ZA")} Saved`,
+      description: `Reached R${amount.toLocaleString("en-ZA")} in total savings`,
       amount: amount,
     }))
 
@@ -53,10 +53,10 @@ export async function AchievementsOverview({ userId }: AchievementsOverviewProps
   const getAchievementIcon = (type: string, name: string) => {
     if (type === "login_streak") return "🔥"
     if (type === "savings_milestone") {
-      if (name.includes("$10,000")) return "💎"
-      if (name.includes("$5,000")) return "🏆"
-      if (name.includes("$1,000")) return "🥇"
-      if (name.includes("$500")) return "🥈"
+      if (name.includes("R10,000")) return "💎"
+      if (name.includes("R5,000")) return "🏆"
+      if (name.includes("R1,000")) return "🥇"
+      if (name.includes("R500")) return "🥈"
       return "🥉"
     }
     if (type === "spending_goal") return "🎯"
@@ -92,7 +92,7 @@ export async function AchievementsOverview({ userId }: AchievementsOverviewProps
     {
       icon: TrendingUp,
       label: "Total Saved",
-      value: `$${totalSaved.toLocaleString()}`,
+      value: `R${totalSaved.toLocaleString("en-ZA")}`,
       color: "text-blue-600 bg-blue-100",
     },
     {
@@ -233,8 +233,10 @@ export async function AchievementsOverview({ userId }: AchievementsOverviewProps
                     <div className="flex items-center space-x-3">
                       <span className="text-lg">{icon}</span>
                       <div>
-                        <p className="font-medium text-gray-900">${amount.toLocaleString()} Saved</p>
-                        <p className="text-sm text-gray-600">Reach ${amount.toLocaleString()} in total savings</p>
+                        <p className="font-medium text-gray-900">R{amount.toLocaleString("en-ZA")} Saved</p>
+                        <p className="text-sm text-gray-600">
+                          Reach R{amount.toLocaleString("en-ZA")} in total savings
+                        </p>
                       </div>
                     </div>
                     {isEarned && <Badge className="bg-green-100 text-green-800 border-green-200">Earned</Badge>}
