@@ -18,7 +18,7 @@ export default function CheckEmailPage() {
               Please check your email and click the confirmation link to activate your account.
             </p>
             <Link
-              href="/auth/login"
+              href="../login"
               className="text-emerald-600 hover:text-emerald-700 font-medium underline underline-offset-4"
             >
               Back to Sign In
