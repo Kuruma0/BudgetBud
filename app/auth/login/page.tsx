@@ -29,8 +29,13 @@ export default function LoginPage() {
   }
 
   const handleSkip = () => {
-    router.push("/dashboard")
-  }
+    // In development, set a flag in localStorage to indicate we're in demo mode
+    if (process.env.NODE_ENV === 'development') {
+      localStorage.setItem('demoMode', 'true');
+    }
+    router.push("/dashboard");
+    router.refresh(); // Force a refresh to ensure the page updates
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-50 to-red-50 p-4">

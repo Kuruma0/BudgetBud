@@ -14,14 +14,20 @@ export default async function DashboardPage() {
   const supabase = await createClient()
 
   const { data, error } = await supabase.auth.getUser()
-  if (error || !data?.user) {
+  
+  // Development mode - bypass auth check
+  const isDev = process.env.NODE_ENV === 'development';
+  if ((error || !data?.user) && !isDev) {
     redirect("/auth/login")
   }
+
+  // Use a default user ID for development
+  const userId = isDev ? 'dev-user-id' : data?.user?.id;
 
   // Record daily login
   await supabase.from("daily_logins").upsert(
     {
-      user_id: data.user.id,
+      user_id: userId,
       login_date: new Date().toISOString().split("T")[0],
     },
     {
@@ -29,9 +35,9 @@ export default async function DashboardPage() {
     },
   )
 
-  await checkAndAwardAchievements(data.user.id)
+  await checkAndAwardAchievements(userId)
 
-  const { data: balanceData } = await supabase.from("transactions").select("amount").eq("user_id", data.user.id)
+  const { data: balanceData } = await supabase.from("transactions").select("amount").eq("user_id", userId)
 
   const balance = balanceData?.reduce((sum, transaction) => sum + transaction.amount, 0) || 0
 
@@ -40,7 +46,7 @@ export default async function DashboardPage() {
   const { data: monthlyData } = await supabase
     .from("transactions")
     .select("amount")
-    .eq("user_id", data.user.id)
+    .eq("user_id", userId)
     .gte("created_at", `${currentMonth}-01`)
     .lt("amount", 0)
 
@@ -48,25 +54,25 @@ export default async function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-yellow-50 to-orange-50">
-      <DashboardHeader user={data.user} />
+      <DashboardHeader user={isDev ? null : data.user} />
 
       <main className="container mx-auto px-4 py-6 space-y-6">
-        <EnhancedBalanceCard userId={data.user.id} balance={balance} monthlySpending={monthlySpending} />
+        <EnhancedBalanceCard userId={userId} balance={balance} monthlySpending={monthlySpending} />
 
         <QuickActions />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <MonthlyCalendar userId={data.user.id} />
-          <BuckRewards userId={data.user.id} />
+          <MonthlyCalendar userId={userId} />
+          <BuckRewards userId={userId} />
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <VirtualTown userId={data.user.id} />
-          <SpendingInsights userId={data.user.id} />
+          <VirtualTown userId={userId} />
+          <SpendingInsights userId={userId} />
         </div>
 
         <div className="grid grid-cols-1 gap-6">
-          <TransactionsList userId={data.user.id} />
+          <TransactionsList userId={userId} />
         </div>
       </main>
     </div>
